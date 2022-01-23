@@ -1,3 +1,12 @@
 #!/bin/bash
-version=0.0
-zip v1.0 + 0.1 0.9
+
+latestTag="$(git describe --tags)" 
+latestTag="$( echo "$latestTag*10" | bc)"
+nextTag=`perl -e "print(($latestTag+1)/10)"`
+git add .
+git commit -m "adding version v$nextTag"
+git tag $nextTag
+git push origin main --tags
+
+
+
